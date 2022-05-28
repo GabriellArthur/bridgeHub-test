@@ -8,7 +8,11 @@ export function Header() {
    const [clicked, setClicked] = useState(false);
 
    const handleClicked = () => {
-      setClicked(!clicked);
+      var screenWidth = screen.width;
+      var windowWidth = window.innerWidth;
+      if (screenWidth <= 960 || windowWidth <= 960) {
+         setClicked(!clicked);
+      }
    };
    return (
       <nav className={styles.navbar}>
