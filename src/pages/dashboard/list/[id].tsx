@@ -312,6 +312,32 @@ export default function Investimento({ id }: IInvestimento) {
                      </Flex>
                   </HStack>
                </Box>
+               <Box
+                  mt='1.3rem'
+                  pt='1.3rem'
+                  bg="blue.800"
+                  boxShadow="2xl"
+                  minW="200px"
+                  minH="120px"
+                  rounded="1rem"
+               >
+                  <HStack align="center" w="100%" justify="space-around">
+                     <Flex w="100%" ml='2rem'>
+                        <Box bg="#3B5998" inline="block" p="13px" rounded="full">
+                           <RiCheckboxBlankLine fontSize="30px" />
+                        </Box>
+                        <VStack align="left" pl='0.5rem'>
+                           <Text
+                              color="gray.400"
+                              fontWeight="bold"
+                           >
+                              Descrição
+                           </Text>
+                           <Text m='0px'>Amarca Bose é gastrobar do grupo BOSE&CO,sendo uma referência...</Text>
+                        </VStack>
+                     </Flex>
+                  </HStack>
+               </Box>
             </Box>
          </Flex >
       </Box >
