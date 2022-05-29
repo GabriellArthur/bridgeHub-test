@@ -18,32 +18,15 @@ import {
 } from "@chakra-ui/react";
 import { RiBarChartGroupedLine, RiCheckboxBlankLine, RiLineChartLine, RiMoneyDollarCircleLine, RiPantoneFill, RiUserLocationLine } from "react-icons/ri";
 
-import { Header } from "../../components/Header";
-import { Sidebar } from "../../components/Sidebar";
+import { Header } from "../../../components/Header";
+import { Sidebar } from "../../../components/Sidebar";
 
-import { investimentos } from "../../components/Investimentos";
-import router from "next/router";
-import { useState } from "react";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
+import { investimentos } from "../../../components/Investimentos";
+import { useRouter } from "next/router";
+import { GetServerSideProps } from "next";
 
-const validadeFormSchema = yup.object().shape({
-   quantity: yup.number().required("Quantidade Obrigatória")
-});
 
-export default function Investimento() {
-   const id = Number(router.query.id);
-
-   const [check, setCheck] = useState(false);
-
-   function handleChangeSelectCheckbox() {
-      setCheck(!check);
-   }
-
-   const { register, handleSubmit, formState } = useForm({
-      resolver: yupResolver(validadeFormSchema)
-   });
+export default function Investimento({ id }) {
 
    const toast = useToast();
 
@@ -127,8 +110,6 @@ export default function Investimento() {
                                     name="quantity"
                                     label="quantidade"
                                     type="quantity"
-                                    error={formState.errors.quantity}
-                                    {...register("quantity")}
                                  />
                               </Flex>
 
@@ -155,7 +136,6 @@ export default function Investimento() {
                                        mt="10"
                                        colorScheme="blue"
                                        size="lg"
-                                       isLoading={formState.isSubmitting}
                                        onClick={() =>
                                           toast({
                                              title: "Parabéns, agora você é sócio desta empresa!",
@@ -332,4 +312,15 @@ export default function Investimento() {
          </Flex >
       </Box >
    );
+}
+
+export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
+   const { query } = useRouter();
+
+   const id = Number(query.id);
+   return {
+      props: {
+         id,
+      }
+   }
 }

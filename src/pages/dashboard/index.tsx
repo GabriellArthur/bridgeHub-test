@@ -1,4 +1,3 @@
-import NextLink from "next/link";
 import { useState } from "react";
 import {
    Box,
@@ -8,21 +7,12 @@ import {
    Icon,
    keyframes,
 } from "@chakra-ui/react";
-import { RiAddLine } from "react-icons/ri";
 
 import { Header } from "../../components/Header";
 import { Pagination } from "../../components/Pagination";
 import { Sidebar } from "../../components/Sidebar";
 import { UsersTable } from "../../components/Tables/Investimentos";
 
-const spin = keyframes`
-  from { 
-    transform: rotate(0deg); 
-  }
-  to { 
-    transform: rotate(360deg); 
-  }
-`;
 
 export default function UserList() {
    const [page, setPage] = useState(1);

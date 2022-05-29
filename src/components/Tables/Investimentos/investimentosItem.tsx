@@ -85,7 +85,7 @@ export function UserItem({
                               {user.name}
                            </Text>
                            <HStack>
-                              <NextLink href={`dashboard/${user.id}`}>
+                              <NextLink key={user.id} href={`dashboard/list/${user.id}`}>
                                  <Button
                                     as="a"
                                     size="sm"
@@ -268,7 +268,7 @@ export function UserItem({
          {isWideVersion && <Td>{user.objetivo}MM</Td>}
          <Td>
             {isWideVersion && (
-               <NextLink href={`dashboard/${user.id}`}>
+               <NextLink key={user.id} href={`dashboard/list/${user.id}`}>
                   <Button
                      as="a"
                      size="sm"
