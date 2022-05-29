@@ -2,13 +2,12 @@ import { Flex, Icon, IconButton, useBreakpointValue } from "@chakra-ui/react";
 
 import { Logo } from "../Logo";
 
-import { NotificationsNav } from "./NotificationsNav";
-import { Profile } from "./Profile";
 
 import { useSidebarDrawer } from "../../hooks/useSidebarDrawer";
 import { RiMenuLine } from "react-icons/ri";
+import { ButtonsNav } from './buttonsNav'
 
-export function Header() {
+export function HeaderHome() {
    const { onOpen } = useSidebarDrawer();
 
    const isWideVersion = useBreakpointValue<boolean>({
@@ -40,9 +39,7 @@ export function Header() {
          <Logo />
 
          <Flex align="center" ml="auto">
-            <NotificationsNav />
-
-            <Profile showProfileData={isWideVersion} />
+            <ButtonsNav />
          </Flex>
       </Flex>
    );

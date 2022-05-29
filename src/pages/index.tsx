@@ -1,18 +1,15 @@
-import Head from "next/head";
-
-import styles from './home.module.scss';
+import { Flex, } from "@chakra-ui/react";
+import { HeaderHome } from "../components/HeaderHome";
+import { SidebarHome } from "../components/SidebarHome";
 
 export default function Home() {
+
    return (
-      <>
-         <Head>
-            <title>Home</title>
-         </Head>
-         <main className={styles.contentContainer}>
-            <div>
-               <h2>A</h2>
-            </div>
-         </main>
-      </>
-   )
+      <Flex direction="column" h="100vh">
+         <HeaderHome />
+         <Flex w="100%" my="6" maxWidth={1480} mx="auto" px="6">
+            <SidebarHome />
+         </Flex>
+      </Flex>
+   );
 }
