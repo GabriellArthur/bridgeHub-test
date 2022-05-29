@@ -23,10 +23,14 @@ import { Sidebar } from "../../../components/Sidebar";
 
 import { investimentos } from "../../../components/Investimentos";
 import { useRouter } from "next/router";
-import { GetServerSideProps } from "next";
 
+interface IInvestimento {
+   id: number;
+}
 
-export default function Investimento({ id }) {
+export default function Investimento({ id }: IInvestimento) {
+   const router = useRouter();
+   id = Number(router.query.id) || 1;
 
    const toast = useToast();
 
@@ -312,15 +316,4 @@ export default function Investimento({ id }) {
          </Flex >
       </Box >
    );
-}
-
-export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
-   const { query } = useRouter();
-
-   const id = Number(query.id);
-   return {
-      props: {
-         id,
-      }
-   }
 }
