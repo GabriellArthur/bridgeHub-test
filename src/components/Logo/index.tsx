@@ -8,7 +8,7 @@ export function Logo() {
          letterSpacing="tight"
          w="64"
       >
-         Briodge
+         Bridge
          <Text as="span" ml="1" color="blue">
             Hub
          </Text>
