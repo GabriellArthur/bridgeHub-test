@@ -3,7 +3,7 @@
    "version": "0.1.0",
    "private": true,
    "scripts": {
-      "dev": "next dev && prisma db push",
+      "dev": "next dev && prisma generate &&prisma db push ",
       "seed": "ts-node --compiler-options \"{\\\"module\\\":\\\"commonjs\\\"}\" prisma/seed.ts",
       "build": "next build",
       "start": "next start"
