@@ -1,0 +1,40 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+   provider = "sqlite"
+   url      = "file:./db/dev.db"
+}
+
+generator client {
+   provider = "prisma-client-js"
+   output   = "./generated/prisma-client-js"
+}
+
+model Investment {
+   id                    Int      @id @default(autoincrement())
+   name                  String
+   nameComplete          String
+   descricacao           String
+   captado               Int
+   reservado             Int
+   objetivo              Int
+   alvo_minimo           Int
+   alvo_maximo           Int
+   valor_minimo          Int
+   rentabilidade_alvo    String
+   pagamentos_projetados String
+   modalidade            String
+   participacao          Int
+   oportunidade          String
+   setor                 String
+   createdAt             DateTime @default(now())
+}
+
+model User {
+   id        Int      @id @default(autoincrement())
+   name      String
+   email     String   @unique
+   password  String
+   createdAt DateTime @default(now())
+}
