@@ -10,7 +10,7 @@
       "start": "next start",
       "postinstall": "postinstall"
    },
-   "postinstall": "npm run migrate",
+   "postinstall": "prisma migrate deploy  && prisma db push && ts-node --compiler-options \"{\\\"module\\\":\\\"commonjs\\\"}\" prisma/seed.ts",
    "dependencies": {
       "@chakra-ui/core": "^0.8.0",
       "@chakra-ui/react": "^1.6.0",
