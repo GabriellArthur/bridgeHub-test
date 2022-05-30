@@ -22,11 +22,14 @@ import { Header as HeaderComponent } from "../../../components/Header";
 import Header from 'next/head';
 import { Sidebar } from "../../../components/Sidebar";
 
-import { investimentos } from "../../../components/Investimentos";
+import { Iinvestimentos, investimentos } from "../../../components/Investimentos";
 import { useRouter } from "next/router";
 
 import dynamic from "next/dynamic";
 import { options } from '../../income'
+import { withSSRAuth } from "../../../services/hof/withSSRAuth";
+import prisma from "../../../lib/prisma";
+import { useAuth } from "../../../hooks/useAuth";
 const Chart = dynamic(() => import("react-apexcharts"), {
    ssr: false
 });
@@ -34,20 +37,29 @@ const Chart = dynamic(() => import("react-apexcharts"), {
 const series1 = [{ name: "series1", data: [40, 60, 50, 70, 151, 80, 180] }];
 const series2 = [{ name: "series2", data: [50, 60, 50, 30, 60, 70, 80] }];
 
-interface IInvestimento {
-   id: number;
-}
-
-export default function Investimento({ id }: IInvestimento) {
+export default function Investimento({
+   name,
+   nameComplete,
+   descricacao,
+   alvo_minimo,
+   alvo_maximo,
+   valor_minimo,
+   rentabilidade_alvo,
+   pagamentos_projetados,
+   modalidade,
+   participacao,
+   oportunidade,
+   setor
+}: Iinvestimentos) {
    const router = useRouter();
-   id = Number(router.query.id) || 1;
+   const { user, signOut } = useAuth();
 
    const toast = useToast();
 
    return (
       <>
          <Header>
-            <title>{investimentos[id].name}</title>
+            <title>{nameComplete}</title>
          </Header>
 
          <Box>
@@ -64,7 +76,7 @@ export default function Investimento({ id }: IInvestimento) {
                            fontSize="35px"
                            fontWeight="bold"
                         >
-                           {investimentos[id].name}
+                           {name}
                         </Text>
                         <Popover onOpen={() => { }}>
                            <PopoverTrigger>
@@ -109,7 +121,7 @@ export default function Investimento({ id }: IInvestimento) {
                                        >
                                           Pronto para essa experiência,
                                        </Text>
-                                       <Text m='0px' fontSize="20px" color="blue.600">Gabriel Arthur</Text>
+                                       <Text m='0px' fontSize="20px" color="blue.600">{user?.name}</Text>
                                        <Text fontSize="20px"> ?</Text>
                                     </HStack>
                                  </Flex>
@@ -121,7 +133,7 @@ export default function Investimento({ id }: IInvestimento) {
                                        >
                                           O valor a ser investido deve ser múltiplo de
                                        </Text>
-                                       <Text m='0px' fontSize="18px" color="blue.400">R$ {investimentos[id].valor_minimo}</Text>
+                                       <Text m='0px' fontSize="18px" color="blue.400">R$ {valor_minimo}</Text>
                                     </HStack>
                                  </Flex>
                                  <Flex align="center" w="100%" pt='1rem'>
@@ -180,7 +192,7 @@ export default function Investimento({ id }: IInvestimento) {
                            >
                               Alvo Minímo:
                            </Text>
-                           <Text> R${investimentos[id].alvo_minimo}</Text>
+                           <Text> R${alvo_minimo}</Text>
                         </Flex>
                         <Flex w="100%">
                            <Text
@@ -189,7 +201,7 @@ export default function Investimento({ id }: IInvestimento) {
                            >
                               Alvo Máximo:
                            </Text>
-                           <Text> R${investimentos[id].alvo_maximo}</Text>
+                           <Text> R${alvo_maximo}</Text>
                         </Flex>
                         <Flex w="50%">
                            <Text
@@ -198,7 +210,7 @@ export default function Investimento({ id }: IInvestimento) {
                            >
                               Valor mínimo:
                            </Text>
-                           <Text> R${investimentos[id].valor_minimo}</Text>
+                           <Text> R${valor_minimo}</Text>
                         </Flex>
                      </HStack>
                      <VStack pb='2rem' pt='2rem' pl='2rem' fontSize="14px">
@@ -213,7 +225,7 @@ export default function Investimento({ id }: IInvestimento) {
                               >
                                  Rentabilidade alvo (TIR)
                               </Text>
-                              <Text m='0px'>{investimentos[id].rentabilidade_alvo}% ao ano</Text>
+                              <Text m='0px'>{rentabilidade_alvo}% ao ano</Text>
                            </VStack>
                         </Flex>
                         <Flex align="center" w="100%" pt='1rem'>
@@ -227,7 +239,7 @@ export default function Investimento({ id }: IInvestimento) {
                               >
                                  Pagamentos Projetados
                               </Text>
-                              <Text m='0px'>{investimentos[id].pagamentos_projetados}</Text>
+                              <Text m='0px'>{pagamentos_projetados}</Text>
                            </VStack>
                         </Flex>
                         <Flex align="center" w="100%" pt='1rem'>
@@ -241,7 +253,7 @@ export default function Investimento({ id }: IInvestimento) {
                               >
                                  Modalidade
                               </Text>
-                              <Text m='0px'>{investimentos[id].modalidade}</Text>
+                              <Text m='0px'>{modalidade}</Text>
                            </VStack>
                         </Flex>
                         <Flex align="center" w="100%" pt='1rem'>
@@ -255,7 +267,7 @@ export default function Investimento({ id }: IInvestimento) {
                               >
                                  Participação
                               </Text>
-                              <Text m='0px'>{investimentos[id].participação}%</Text>
+                              <Text m='0px'>{participacao}%</Text>
                            </VStack>
                         </Flex>
                      </VStack>
@@ -280,7 +292,7 @@ export default function Investimento({ id }: IInvestimento) {
                               >
                                  Oportunidades
                               </Text>
-                              <Text m='0px'>{investimentos[id].oportunidade}</Text>
+                              <Text m='0px'>{oportunidade}</Text>
                            </VStack>
                         </Flex>
                         <Flex w="40%">
@@ -295,7 +307,7 @@ export default function Investimento({ id }: IInvestimento) {
                               >
                                  Setor
                               </Text>
-                              <Text m='0px'>{investimentos[id].setor}</Text>
+                              <Text m='0px'>{setor}</Text>
                            </VStack>
                         </Flex>
                         <Flex w="30%">
@@ -309,13 +321,13 @@ export default function Investimento({ id }: IInvestimento) {
                               >
                                  Valor Cota
                               </Text>
-                              <Text m='0px'>R${investimentos[id].valor_minimo}</Text>
+                              <Text m='0px'>R${valor_minimo}</Text>
                            </VStack>
                         </Flex>
                         <Flex w="15%">
                            <Box bg="#ffff" inline="block" p="10px" w="80px" rounded="full" border="green">
                               <VStack >
-                                 <Text color="black" fontWeight="bold" m='0px'>{investimentos[id].participação}%</Text>
+                                 <Text color="black" fontWeight="bold" m='0px'>{participacao}%</Text>
                                  <Text
                                     color="black"
                                     fontWeight="bold"
@@ -371,7 +383,7 @@ export default function Investimento({ id }: IInvestimento) {
                               >
                                  Descrição
                               </Text>
-                              <Text m='0px'>A marca Bose é gastrobar do grupo BOSE&CO,sendo uma referência em bares e restaurantes trás uma grande oportunidade de investimento para os anos de 2020 a 2050</Text>
+                              <Text m='0px'>A empresa {name} faz parte da {nameComplete} e está no mercado.</Text>
                            </VStack>
                         </Flex>
                      </HStack>
@@ -418,3 +430,35 @@ export default function Investimento({ id }: IInvestimento) {
       </>
    );
 }
+
+
+export const getServerSideProps = withSSRAuth<Iinvestimentos>(async ctx => {
+   const id = Number(ctx.query.id);
+
+   const investment = await prisma.investment.findFirst({
+      where: {
+         id
+      }
+   });
+
+   prisma.$disconnect();
+
+
+   return {
+      props: {
+         id: investment.id,
+         name: investment.name,
+         nameComplete: investment.nameComplete,
+         descricacao: investment.descricacao,
+         alvo_minimo: investment.alvo_minimo,
+         alvo_maximo: investment.alvo_maximo,
+         valor_minimo: investment.valor_minimo,
+         rentabilidade_alvo: investment.rentabilidade_alvo,
+         pagamentos_projetados: investment.pagamentos_projetados,
+         modalidade: investment.modalidade,
+         participacao: investment.participacao,
+         oportunidade: investment.oportunidade,
+         setor: investment.setor,
+      }
+   };
+});

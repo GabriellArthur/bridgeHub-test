@@ -9,7 +9,7 @@ export function ButtonsNav() {
          color="gray.300"
          borderColor="gray.700"
       >
-         <Link href={'/login'} passHref>
+         <Link href={'/login'}>
             <Button
                type="button"
                colorScheme="gray.900"
@@ -18,7 +18,7 @@ export function ButtonsNav() {
                Entrar
             </Button>
          </Link>
-         <Link href={'/login'} passHref>
+         <Link href={'/login'}>
             <Button
                type="button"
                colorScheme="blue"

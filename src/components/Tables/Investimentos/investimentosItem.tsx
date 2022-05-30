@@ -185,7 +185,7 @@ export function UserItem({
                                  >
                                     Participação
                                  </Text>
-                                 <Text m='0px'>{user.participação}%</Text>
+                                 <Text m='0px'>{user.participacao}%</Text>
                               </VStack>
                            </Flex>
                         </VStack>
@@ -244,7 +244,7 @@ export function UserItem({
                            <Flex w="15%">
                               <Box bg="#ffff" inline="block" p="15px" w="80px" rounded="full" border="green">
                                  <VStack >
-                                    <Text color="black" fontWeight="bold" m='0px'>{user.participação}%</Text>
+                                    <Text color="black" fontWeight="bold" m='0px'>{user.participacao}%</Text>
                                     <Text
                                        color="black"
                                        fontWeight="bold"

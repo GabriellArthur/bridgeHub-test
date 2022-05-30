@@ -14,7 +14,7 @@ export interface Iinvestimentos {
    rentabilidade_alvo: string;
    pagamentos_projetados: string;
    modalidade: string;
-   participação: number;
+   participacao: number;
 
    oportunidade: string;
    setor: string;
@@ -22,7 +22,7 @@ export interface Iinvestimentos {
 
 export const investimentos = [
    {
-      'id': 0,
+      'id': 5,
       'name': 'Bose',
       'nameComplete': 'Bares e Restaurantes',
       'descricacao': 'Amarca Bose é gastrobar do grupo BOSE&CO,sendo uma referência...',
@@ -40,8 +40,8 @@ export const investimentos = [
       'setor': 'Bares e Restaurantes',
    },
    {
-      'id': 1,
-      'name': 'Bose',
+      'id': 6,
+      'name': 'Bose 2',
       'nameComplete': 'Bares e Restaurantes',
       'descricacao': 'Amarca Bose é gastrobar do grupo BOSE&CO,sendo uma referência...',
       'captado': 2,

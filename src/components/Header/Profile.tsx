@@ -12,11 +12,15 @@ import {
 } from "@chakra-ui/react";
 
 import NextLink from "next/link";
+import { useAuth } from "../../hooks/useAuth";
 interface ProfileProps {
    showProfileData?: boolean;
 }
 
 export function Profile({ showProfileData = true }: ProfileProps) {
+   const { user, signOut } = useAuth();
+
+
 
    const toast = useToast();
 
@@ -24,16 +28,16 @@ export function Profile({ showProfileData = true }: ProfileProps) {
       <Flex align="center">
          {showProfileData && (
             <Box mr="4" textAlign="right">
-               <Text>Gabriel Arthur</Text>
+               <Text>{user?.name}</Text>
                <Text color="gray.300" fontSize="small">
-                  dev.gabrielfiusa@gmail.com
+                  {user?.email}
                </Text>
             </Box>
          )}
 
          <Menu>
             <MenuButton>
-               <Avatar size="md" name='dev.gabrielfiusa@gmail.com' />
+               <Avatar size="md" name={user?.email} />
             </MenuButton>
             <MenuList bg="gray.800" borderColor="transparent" boxShadow="lg">
                <MenuGroup>
@@ -57,17 +61,13 @@ export function Profile({ showProfileData = true }: ProfileProps) {
                   >
                      Meu perfil
                   </MenuItem>
-                  <NextLink href={`/`}>
+                  <NextLink href={`/login`}>
                      <MenuItem
                         fontSize="15px"
                         _hover={{
                            bg: "pink.500"
                         }}
-                        onClick={() =>
-                           toast({
-                              title: "Saindo",
-                              status: "success"
-                           })
+                        onClick={() => { signOut }
                         }
                      >
                         Sair
@@ -105,3 +105,7 @@ export function Profile({ showProfileData = true }: ProfileProps) {
       </Flex>
    );
 }
+function setState(arg0: {}) {
+   throw new Error("Function not implemented.");
+}
+

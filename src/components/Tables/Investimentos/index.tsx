@@ -12,9 +12,13 @@ import {
 } from "@chakra-ui/react";
 
 import { UserItem } from "./investimentosItem";
-import { investimentos } from "../../Investimentos/";
+import { Iinvestimentos, investimentos } from "../../Investimentos/";
 
-export function UsersTable() {
+interface InvestimentosTableProps {
+   investimentos: Iinvestimentos[];
+}
+
+export function UsersTable({investimentos}:InvestimentosTableProps) {
 
    const deleteUser = {};
 

@@ -6,9 +6,13 @@ import { Logo } from "../Logo";
 import { useSidebarDrawer } from "../../hooks/useSidebarDrawer";
 import { RiMenuLine } from "react-icons/ri";
 import { ButtonsNav } from './buttonsNav'
+import { useAuth } from "../../hooks/useAuth";
+import { Profile } from "../Header/Profile";
+import { NotificationsNav } from "../Header/NotificationsNav";
 
 export function HeaderHome() {
    const { onOpen } = useSidebarDrawer();
+   const { user, signOut } = useAuth();
 
    const isWideVersion = useBreakpointValue<boolean>({
       base: false,
@@ -39,7 +43,14 @@ export function HeaderHome() {
          <Logo />
 
          <Flex align="center" ml="auto">
-            <ButtonsNav />
+            {user != undefined ?
+               <>
+                  <NotificationsNav />
+                  <Profile showProfileData={isWideVersion} />
+               </>
+               :
+               <ButtonsNav />
+            }
          </Flex>
       </Flex>
    );

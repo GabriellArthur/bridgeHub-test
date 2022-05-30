@@ -8,6 +8,9 @@ import NProgress from "nprogress";
 
 import { theme } from "../styles/theme";
 import { SidebarDrawerProvider } from "../containers/SidebarDrawerProvider";
+import { AuthProvider } from "../containers/AuthProvider";
+
+import { queryClient } from "../services/queryClient";
 
 import "nprogress/nprogress.css";
 import "../styles/global.css";
@@ -42,11 +45,17 @@ function MyApp({ Component, pageProps }: AppProps) {
    }, [router.asPath]);
 
    return (
-      <ChakraProvider theme={theme}>
-         <SidebarDrawerProvider>
-            <Component {...pageProps} />
-         </SidebarDrawerProvider>
-      </ChakraProvider>
+      <QueryClientProvider client={queryClient}>
+         <AuthProvider>
+            <ChakraProvider theme={theme}>
+               <SidebarDrawerProvider>
+                  <Component {...pageProps} />
+               </SidebarDrawerProvider>
+            </ChakraProvider>
+         </AuthProvider>
+
+         <ReactQueryDevtools />
+      </QueryClientProvider>
    );
 }
 
