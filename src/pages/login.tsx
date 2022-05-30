@@ -1,4 +1,4 @@
-import { Flex, Button, Stack, Box } from "@chakra-ui/react";
+import { Flex, Button, Stack, Box, Text } from "@chakra-ui/react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -49,6 +49,14 @@ export default function SignIn() {
 
                <Box flex="1" borderRadius={8} bg="gray.800">
                   <Flex align="center" justify="center">
+                     <Box>
+                        <Text fontWeight="bold">
+                           login: administrador@bridge.net
+                        </Text>
+                        <Text fontWeight="bold">
+                           senha: admin
+                        </Text>
+                     </Box>
                      <Flex
                         as="form"
                         w="100%"

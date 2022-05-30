@@ -67,8 +67,7 @@ export function Profile({ showProfileData = true }: ProfileProps) {
                         _hover={{
                            bg: "pink.500"
                         }}
-                        onClick={() => { signOut }
-                        }
+                        onClick={ signOut }
                      >
                         Sair
                      </MenuItem>

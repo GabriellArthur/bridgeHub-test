@@ -61,10 +61,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
       destroyCookie(undefined, "@bridge.token");
 
       router.push("/login");
-      toast({
-         title: "Saindo",
-         status: "success"
-      })
    }
 
    useEffect(() => {

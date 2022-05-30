@@ -22,7 +22,6 @@ import { Header as HeaderComponent } from "../../../components/Header";
 import Header from 'next/head';
 import { Sidebar } from "../../../components/Sidebar";
 
-import { Iinvestimentos, investimentos } from "../../../components/Investimentos";
 import { useRouter } from "next/router";
 
 import dynamic from "next/dynamic";
@@ -36,6 +35,28 @@ const Chart = dynamic(() => import("react-apexcharts"), {
 
 const series1 = [{ name: "series1", data: [40, 60, 50, 70, 151, 80, 180] }];
 const series2 = [{ name: "series2", data: [50, 60, 50, 30, 60, 70, 80] }];
+
+interface Iinvestimentos {
+   id: number;
+   name: string;
+   nameComplete: string;
+   descricacao: string;
+   captado: number;
+   reservado: number;
+   objetivo: number;
+
+   alvo_minimo: number;
+   alvo_maximo: number;
+   valor_minimo: number;
+
+   rentabilidade_alvo: string;
+   pagamentos_projetados: string;
+   modalidade: string;
+   participacao: number;
+
+   oportunidade: string;
+   setor: string;
+}
 
 export default function Investimento({
    name,
@@ -432,7 +453,7 @@ export default function Investimento({
 }
 
 
-export const getServerSideProps = withSSRAuth<Iinvestimentos>(async ctx => {
+export const getServerSideProps = withSSRAuth(async ctx => {
    const id = Number(ctx.query.id);
 
    const investment = await prisma.investment.findFirst({
@@ -446,7 +467,6 @@ export const getServerSideProps = withSSRAuth<Iinvestimentos>(async ctx => {
 
    return {
       props: {
-         id: investment.id,
          name: investment.name,
          nameComplete: investment.nameComplete,
          descricacao: investment.descricacao,

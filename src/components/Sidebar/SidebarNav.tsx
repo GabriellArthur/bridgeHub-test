@@ -18,7 +18,7 @@ export function SidebarNav() {
             {user != undefined ?
                <>
                   <NavLink title="Rendimentos" icon={RiBarChartGroupedFill} href="/income" />
-                  <NavLink title="Dashboard" icon={RiDashboardLine} href="/dashboard" />
+                  <NavLink title="Investimentos" icon={RiDashboardLine} href="/dashboard" />
                </>
                :
                <></>
